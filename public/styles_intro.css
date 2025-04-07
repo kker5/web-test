@@ -1,0 +1,147 @@
+/* styles.css */
+:root {
+    --primary-gradient: linear-gradient(180deg, white 0%, #FFE8C5 100%);
+    --card-gradient: linear-gradient(180deg, #EED9AA 0%, #AF9761 100%);
+    --card-bottom-gradient: linear-gradient(180deg, #EED9AA 0%, #FAE7BF 100%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'SpoqaHanSans', sans-serif;
+}
+
+.app-container {
+    width: 375px;
+    height: 812px;
+    position: relative;
+    background: var(--primary-gradient);
+    overflow: hidden;
+}
+
+/* Status Bar */
+.status-bar {
+    height: 44px;
+    position: relative;
+}
+
+.time {
+    position: absolute;
+    left: 21px;
+    top: 14.33px;
+    font-size: 15px;
+}
+
+.battery-indicator {
+    position: absolute;
+    right: 15.67px;
+    top: 17.33px;
+}
+
+/* Main Content */
+.back-button {
+    width: 16px;
+    height: 8px;
+    position: absolute;
+    left: 20px;
+    top: 71.31px;
+    transform: rotate(-45deg);
+    border: 2px solid black;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.hero-section {
+    text-align: center;
+    padding-top: 104px;
+}
+
+.hero-title {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 38px;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.40);
+}
+
+/* Card Preview */
+.card-preview {
+    position: relative;
+    margin-top: 50px;
+}
+
+.card-gradient-bg {
+    width: 211.28px;
+    height: 186.32px;
+    position: absolute;
+    left: 82.72px;
+    top: 392.74px;
+    background: var(--card-gradient);
+    border-radius: 12px;
+}
+
+.card-image {
+    position: absolute;
+    left: 95.37px;
+    top: 310px;
+}
+
+.card-bottom-layer-1 {
+    width: 211.28px;
+    height: 115.08px;
+    position: absolute;
+    left: 82.72px;
+    top: 503.68px;
+    background: #EED69F;
+    border-radius: 12px;
+}
+
+.card-bottom-layer-2 {
+    width: 211.28px;
+    height: 85.39px;
+    position: absolute;
+    left: 82.72px;
+    top: 533.36px;
+    background: var(--card-bottom-gradient);
+    border-radius: 12px;
+}
+
+/* Footer */
+.app-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.cta-button {
+    width: 327px;
+    height: 67px;
+    margin: 0 24px 15px;
+    background: black;
+    border-radius: 18px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.home-indicator {
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.indicator-bar {
+    width: 134px;
+    height: 5px;
+    background: black;
+    border-radius: 100px;
+}
