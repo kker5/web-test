@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>금액 입력</title>
+<style>
+body {
+font-family: sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f7f7f7;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 100vh;
+}
+.container {
+background-color: #fff;
+width: 100%;
+max-width: 400px;
+height: auto; /* 키보드 표시될 때 높이 자동 조절 */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding-top: 50px;
+padding-bottom: 20px;
+box-sizing: border-box;
+}
+.top-bar {
+width: 100%;
+padding: 15px 20px;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+box-sizing: border-box;
+}
+.back-button {
+font-size: 24px;
+color: #333;
+text-decoration: none;
+}
+.title {
+font-size: 20px;
+font-weight: bold;
+color: #333;
+margin-top: 30px;
+text-align: center;
+}
+.amount-input-wrapper {
+margin-top: 20px;
+width: 80%;
+}
+#amountInput {
+width: 100%;
+padding: 15px;
+font-size: 24px;
+color: #333;
+border: none;
+border-radius: 8px;
+text-align: center;
+box-sizing: border-box;
+cursor: pointer; /* 클릭 가능하도록 커서 변경 */
+}
+.next-button-wrapper {
+width: 100%;
+display: flex;
+justify-content: center;
+padding: 20px 0;
+box-sizing: border-box;
+}
+.next-button {
+background-color: #f0e68c;
+color: #333;
+border: none;
+width: 80%;
+padding: 15px 80px;
+border-radius: 10px;
+font-size: 18px;
+cursor: pointer;
+}
+.keyboard-container {
+width: 100%;
+background-color: #f9f9f9;
+padding: 20px;
+box-sizing: border-box;
+margin-top: auto;
+display: none; /* 초기에는 숨김 */
+}
+.keyboard {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 8px;
+}
+.keyboard-button {
+background-color: #fff;
+border: 1px solid #eee;
+padding: 15px;
+border-radius: 8px;
+font-size: 18px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+color: #333;
+}
+.keyboard-blank {
+padding: 15px;
+border-radius: 8px;
+font-size: 18px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+}
+.keyboard-button span:last-child {
+font-size: 12px;
+color: #777;
+}
+.keyboard-button.zero {
+grid-column: 1 / span 3;
+}
+.keyboard-button.delete {
+background-color: #fff;
+border: 1px solid #eee;
+padding: 15px;
+border-radius: 8px;
+font-size: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+color: #333;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="top-bar">
+<a href="#" class="back-button">←</a>
+</div>
+<div class="title">얼마를 담아<br>보낼까요?</div>
+<div class="amount-input-wrapper">
+<input type="text" id="amountInput" placeholder="보낼 금액" readonly>
+</div>
+<div class="next-button-wrapper">
+<button class="next-button">다음</button>
+</div>
+<div id="keyboardContainer" class="keyboard-container">
+<div class="keyboard">
+<button type="button" class="keyboard-button" data-value="1">1</button>
+<button type="button" class="keyboard-button" data-value="2">2</button>
+<button type="button" class="keyboard-button" data-value="3">3</button>
+<button type="button" class="keyboard-button" data-value="4">4</button>
+<button type="button" class="keyboard-button" data-value="5">5</button>
+<button type="button" class="keyboard-button" data-value="6">6</button>
+<button type="button" class="keyboard-button" data-value="7">7</button>
+<button type="button" class="keyboard-button" data-value="8">8</button>
+<button type="button" class="keyboard-button" data-value="9">9</button>
+<span class="keyboard-blank"></span>
+<button type="button" class="keyboard-button" data-value="0">0</button>
+<button type="button" class="keyboard-button delete">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H3l2 6h12l2-6zM3 14h18v6H3z"></path></svg>
+</button>
+</div>
+</div>
+</div>
+<script>
+const amountInput = document.getElementById('amountInput');
+const keyboardContainer = document.getElementById('keyboardContainer');
+const keyboardButtons = document.querySelectorAll('.keyboard-button:not(.delete)');
+const deleteButton = document.querySelector('.keyboard-button.delete');
+let currentAmount = '';
+// 금액 입력창 클릭 시 키보드 표시
+amountInput.addEventListener('click', () => {
+keyboardContainer.style.display = 'block';
+});
+keyboardButtons.forEach(button => {
+button.addEventListener('click', () => {
+const value = button.dataset.value;
+currentAmount += value;
+amountInput.value = formatCurrency(currentAmount);
+});
+});
+deleteButton.addEventListener('click', () => {
+if (currentAmount.length > 0) {
+currentAmount = currentAmount.slice(0, -1);
+amountInput.value = formatCurrency(currentAmount);
+if (currentAmount === '') {
+amountInput.value = formatCurrency('0');
+}
+}
+});
+function formatCurrency(numberString) {
+if (!numberString) {
+return '0원';
+}
+const number = parseInt(numberString, 10);
+if (isNaN(number)) {
+return '0원';
+}
+return number.toLocaleString('ko-KR') + '원';
+}
+</script>
+</body>
+</html>

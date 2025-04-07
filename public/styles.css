@@ -7,7 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 }
 
 .container {
@@ -18,6 +18,15 @@ body {
 header {
     background-color: #333;
     color: white;
+}
+
+.no-border {
+    border: none;
+    outline: none;
+}
+
+.centered-input {
+    text-align: center;
     text-align: center;
     padding: 1rem;
     margin-bottom: 1rem;
