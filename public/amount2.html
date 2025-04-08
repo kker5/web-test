@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두근두근 송금 카드</title>
+</head>
+<body>
+    <div data-layer="3" style="width: 375px; height: 812px; position: relative; background: white; overflow: hidden">
+        <div data-layer="얼마를 담아 보낼까요?" style="left: 24px; top: 169px; position: absolute; text-align: center; color: black">
+            얼마를 담아 <br />보낼까요?</div>
+        <img data-layer="IMG_19CFECA986C2-1 1" style="width: 375px; height: 812px; left: 0px; top: 0px; position: absolute" src="IMG_19CFECA986C2-1 1.png" />
+        <div style="left: 109px; top: 266px; position: absolute; text-align: center;">
+            <input type="text" id="amount" placeholder="0" style="width: 200px; font-family: Pretendard; font-size: 40px; text-align: right; border: none; outline: none; background: transparent;" oninput="formatCurrency(this)" value="" />
+        </div>
+        <script>
+            function formatCurrency(input) {
+                // Remove all non-numeric characters
+                let value = input.value.replace(/[^\d]/g, '');
+                
+                // Convert to number and format with commas
+                if (value) {
+                    const number = parseInt(value);
+                    input.value = number.toLocaleString('ko-KR') + '원';
+                } else {
+                    input.value = '';
+                }
+            }
+        </script>
+        <div data-svg-wrapper data-layer="Rectangle 6" style="left: 24px; top: 450px; position: absolute">
+            <svg width="327" height="67" viewBox="0 0 327 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 20C0 8.95431 8.95431 0 20 0H307C318.046 0 327 8.95431 327 20V47C327 58.0457 318.046 67 307 67H20C8.9543 67 0 58.0457 0 47V20Z" fill="#FF4D12"/>
+            </svg>
+        </div>
+        <div data-layer="다음" style="left: 152px; top: 471px; position: absolute; text-align: center; color: white">
+            다음</div>
+    </div>
+</body>
+</html>

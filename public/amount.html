@@ -12,15 +12,13 @@
         <div data-layer="얼마를 담아 보낼까요?"
             style="left: 121px; top: 104px; position: absolute; text-align: center; color: black; font-size: 26px; font-family: SpoqaHanSans; font-weight: 700; line-height: 34px; word-wrap: break-word">
             얼마를 담아 <br />보낼까요?</div>
-        <img data-layer="IMG_19CFECA986C2-1 1"
+        <!-- <img data-layer="IMG_19CFECA986C2-1 1"
             style="width: 375px; height: 279px; left: 0px; top: 533px; position: absolute"
-            src="https://placehold.co/375x279" />
+            src="https://placehold.co/375x279" /> -->
         <div data-layer="300,000"
-            style="left: 109px; top: 266px; position: absolute; text-align: center; color: black; font-size: 34px; font-family: SpoqaHanSans; font-weight: 700; line-height: 38px; word-wrap: break-word">
-            300,000</div>
-        <div data-layer="원"
-            style="left: 241px; top: 266px; position: absolute; text-align: center; color: black; font-size: 28px; font-family: SpoqaHanSans; font-weight: 700; line-height: 38px; word-wrap: break-word">
-            원</div>
+            style="left: 85.5px; top: 266px; position: absolute; text-align: center; color: black; font-size: 34px; font-family: SpoqaHanSans; font-weight: 700; line-height: 38px; word-wrap: break-word">
+            <input type="text" id="amount" placeholder="보낼 금액" style="width: 200px; font-family: Pretendard; font-size: 40px; text-align: right; border: none; outline: none; background: transparent; text-align: center;" oninput="formatCurrency(this)" value="" />
+        </div>
         <div data-svg-wrapper data-layer="Rectangle 6" style="left: 24px; top: 450px; position: absolute">
             <svg width="327" height="67" viewBox="0 0 327 67" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -43,4 +41,19 @@
             다음</div>
     </div>
     </div>
+    <script>
+        function formatCurrency(input) {
+            // Remove all non-numeric characters
+            let value = input.value.replace(/[^\d]/g, '');
+            
+            // Convert to number and format with commas
+            if (value) {
+                const number = parseInt(value);
+                input.value = number.toLocaleString('ko-KR') + '원';
+            } else {
+                input.value = '';
+            }
+        }
+    </script>
 </body>
+
