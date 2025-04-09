@@ -1,9 +1,9 @@
 /* styles.css */
-:root {
+/* :root {
     --primary-gradient: linear-gradient(180deg, white 0%, #FFE8C5 100%);
     --card-gradient: linear-gradient(180deg, #EED9AA 0%, #AF9761 100%);
     --card-bottom-gradient: linear-gradient(180deg, #EED9AA 0%, #FAE7BF 100%);
-}
+} */
   
 html, body, #root {
     margin: 0;
@@ -12,7 +12,7 @@ html, body, #root {
     height: 100%;
     font-family: 'SpoqaHanSans', sans-serif;
 }
-
+/* 
 .app-container {
     width: 375px;
     height: 812px;
@@ -21,7 +21,6 @@ html, body, #root {
     overflow: hidden;
 }
 
-/* Status Bar */
 .status-bar {
     height: 44px;
     position: relative;
@@ -40,7 +39,6 @@ html, body, #root {
     top: 17.33px;
 }
 
-/* Main Content */
 .back-button {
     width: 16px;
     height: 8px;
@@ -72,7 +70,7 @@ html, body, #root {
     color: rgba(0, 0, 0, 0.40);
 }
 
-/* Card Preview */
+
 .card-preview {
     position: relative;
     margin-top: 50px;
@@ -114,7 +112,7 @@ html, body, #root {
     border-radius: 12px;
 }
 
-/* Footer */
+
 .app-footer {
     position: absolute;
     bottom: 0;
@@ -146,4 +144,4 @@ html, body, #root {
     height: 5px;
     background: black;
     border-radius: 100px;
-}
+} */
