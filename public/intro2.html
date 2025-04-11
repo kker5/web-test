@@ -31,6 +31,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            overflow: hidden;
         }
         .title {
             font-size: 24px;
@@ -42,6 +44,16 @@
             margin-bottom: 40px;
             line-height: 1.5;
         }
+        .card-container {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-wrapper {
+            display: flex;
+            animation: slide 3s linear infinite;
+        }
         .card {
             display: inline-block;
             width: 150px;
@@ -51,6 +63,7 @@
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             background-color: white;
+            flex-shrink: 0;
         }
         .card img {
             width: 100%;
@@ -76,6 +89,14 @@
             max-width: 300px;
             text-align: center;
         }
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-150px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -83,9 +104,25 @@
         <div class="content">
             <div class="title">나만의 송금 카드 만들기</div>
             <div class="subtitle">송금할 때 편지 쓰면 AI가 나만의 카드로 만들어 드려요</div>
-            <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card Image">
-                <div class="card-text">이탈리아 여행 잘하고 와<br>테베레강 러닝은 필수!</div>
+            <div class="card-container">
+                <div class="card-wrapper">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" alt="Card Image">
+                        <div class="card-text">이탈리아 여행 잘하고 와<br>테베레강 러닝은 필수!</div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" alt="Card Image">
+                        <div class="card-text">이탈리아 여행 잘하고 와<br>테베레강 러닝은 필수!</div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" alt="Card Image">
+                        <div class="card-text">이탈리아 여행 잘하고 와<br>테베레강 러닝은 필수!</div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" alt="Card Image">
+                        <div class="card-text">이탈리아 여행 잘하고 와<br>테베레강 러닝은 필수!</div>
+                    </div>
+                </div>
             </div>
         </div>
         <a href="#" class="button">송금 카드 만들기</a>
