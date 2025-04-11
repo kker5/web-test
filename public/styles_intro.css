@@ -4,13 +4,19 @@
     --card-gradient: linear-gradient(180deg, #EED9AA 0%, #AF9761 100%);
     --card-bottom-gradient: linear-gradient(180deg, #EED9AA 0%, #FAE7BF 100%);
 } */
-  
-html, body, #root {
+ 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 1000px;
+    height: 1000px;
+}
+
+#root {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: 'SpoqaHanSans', sans-serif;
 }
 /* 
 .app-container {

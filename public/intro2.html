@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>송금 카드 만들기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .title {
+            font-size: 24px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        .card {
+            display: inline-block;
+            width: 150px;
+            height: 200px;
+            margin: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .card-text {
+            padding: 10px;
+            background-color: #fff;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ffc107;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: auto;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="title">나만의 송금 카드 만들기</div>
+            <div class="subtitle">송금할 때 편지 쓰면 AI가 나만의 카드로 만들어 드려요</div>
+            <div class="card">
+                <img src="https://via.placeholder.com/150" alt="Card Image">
+                <div class="card-text">이탈리아 여행 잘하고 와<br>테베레강 러닝은 필수!</div>
+            </div>
+        </div>
+        <a href="#" class="button">송금 카드 만들기</a>
+    </div>
+</body>
+</html>
