@@ -207,8 +207,27 @@
             </div>
         </div>
     </div>
-    <div class="button" onclick="window.location.href='amount.html'">
-        <a href="#">친구에게도 알려주기</a>
+    <div class="button">
+        <a href="#" onclick="shareContent(event)">친구에게도 알려주기</a>
     </div>
+    <script>
+        async function shareContent(event) {
+            event.preventDefault();
+            
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: '송금 카드 만들기',
+                        text: '나만의 송금 카드를 만들어보세요!',
+                        url: window.location.origin
+                    });
+                } catch (error) {
+                    console.log('공유하기 실패:', error);
+                }
+            } else {
+                alert('공유하기가 지원되지 않는 브라우저입니다.');
+            }
+        }
+    </script>
 </body>
 </html>
