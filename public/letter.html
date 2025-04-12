@@ -90,10 +90,11 @@
             font-weight: 500;
         }
 
-        .amount-input {
+        .letter-input {
             text-align: center;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: bold;
+            font-family: 'SpoqaHanSans';
             margin: 40px 0;
             border: none;
             background: transparent;
@@ -104,29 +105,24 @@
             appearance: none;
             padding: 0;
             box-sizing: border-box;
+            resize: none;
+            height: auto;
+            min-height: 44px;
+            max-height: 88px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
 
-        .amount-input::placeholder {
+        .letter-input::placeholder {
             color: #999;
         }
 
         /* 입력 필드의 스피너(위아래 화살표) 제거 */
-        .amount-input::-webkit-outer-spin-button,
-        .amount-input::-webkit-inner-spin-button {
+        .letter-input::-webkit-outer-spin-button,
+        .letter-input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
-        }
-
-        .amount-input[type=number] {
-            -moz-appearance: textfield;
-        }
-
-        .amount-display {
-            text-align: center;
-            font-size: 32px;
-            font-weight: bold;
-            margin: 40px 0;
-            color: #000;
         }
 
         .button {
@@ -164,54 +160,95 @@
             </div>
             <div class="recipient-name">안성훈님에게</div>
         </div>
-        <div class="title">얼마를 담아</div>
-        <div class="title">보낼까요?</div>
+        <div class="title">보내고 싶은</div>
+        <div class="title">편지를 써보세요</div>
         <input type="text" 
-               pattern="[0-9]*" 
-               inputmode="numeric" 
-               class="amount-input" 
-               id="amountInput" 
-               placeholder="보낼 금액">
+               class="letter-input" 
+               id="letterInput" 
+               placeholder="편지를 써보세요">
     </div>
     <div class="button">
-        <a href="#" id="nextButton">다음</a>
+        <a href="#" id="nextButton">만들기</a>
     </div>
 
     <script>
-        const amountInput = document.getElementById('amountInput');
         const nextButton = document.getElementById('nextButton');
+        const letterInput = document.getElementById('letterInput');
 
-        function formatCurrency(amount) {
-            if (!amount) return '';
-            // 모든 쉼표 제거 후 숫자만 추출
-            const numericValue = amount.toString().replace(/[^\d]/g, '');
-            return new Intl.NumberFormat('ko-KR').format(numericValue);
+        // textarea로 변경
+        const textarea = document.createElement('textarea');
+        textarea.className = letterInput.className;
+        textarea.id = letterInput.id;
+        textarea.placeholder = letterInput.placeholder;
+        letterInput.parentNode.replaceChild(textarea, letterInput);
+
+        // 입력 제한 함수
+        function limitInput(e) {
+            const text = e.target.value;
+            const lines = text.split('\n');
+            
+            // 줄 제한
+            if (lines.length > 2) {
+                e.target.value = lines.slice(0, 2).join('\n');
+                return;
+            }
+
+            // 각 줄별 글자 수 제한
+            let firstLine = '';
+            let secondLine = '';
+            let count = 0;
+            const kor_char_size = 1;
+            const etc_char_size = 0.8;
+            const max_char_size = 11;
+            for (let char of lines[0]) {
+                if (/[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/.test(char)) {
+                    // 한글인 경우
+                    if (count + kor_char_size <= max_char_size) {
+                        firstLine += char;
+                        count += kor_char_size;
+                    } else if (lines.length === 1) {
+                        // 첫 번째 줄이 가득 찼을 때 자동으로 다음 줄로
+                        secondLine += char;
+                    }
+                } else {
+                    // 영문, 숫자, 공백인 경우
+                    if (count + etc_char_size <= max_char_size) {
+                        firstLine += char;
+                        count += etc_char_size;
+                    } else if (lines.length === 1) {
+                        // 첫 번째 줄이 가득 찼을 때 자동으로 다음 줄로
+                        secondLine += char;
+                    }
+                }
+            }
+
+            // 두 번째 줄이 있는 경우 처리
+            if (lines.length > 1) {
+                let secondCount = 0;
+                for (let char of lines[1]) {
+                    if (/[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/.test(char)) {
+                        if (secondCount + kor_char_size <= max_char_size) {
+                            secondLine += char;
+                            secondCount += kor_char_size;
+                        }
+                    } else {
+                        if (secondCount + etc_char_size <= max_char_size) {
+                            secondLine += char;
+                            secondCount += etc_char_size;
+                        }
+                    }
+                }
+            }
+
+            // 결과 적용
+            e.target.value = secondLine ? `${firstLine}\n${secondLine}` : firstLine;
         }
 
-        amountInput.addEventListener('input', function(e) {
-            const cursorPosition = e.target.selectionStart;
-            const originalLength = e.target.value.length;
-            
-            // 현재 값에서 숫자만 추출
-            let value = e.target.value.replace(/[^\d]/g, '');
-            if (value.length > 9) value = value.slice(0, 9);
-            
-            if (value) {
-                const formattedValue = formatCurrency(value) + '원';
-                e.target.value = formattedValue;
-                // 커서 위치 조정
-                const lengthDiff = e.target.value.length - originalLength;
-                const newPosition = cursorPosition + lengthDiff;
-                e.target.setSelectionRange(newPosition, newPosition);
-            }
-        });
-
-        // 다음 버튼 클릭 이벤트 추가
-        nextButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            const amount = amountInput.value.replace(/[^\d]/g, '');
-            if (amount) {
-                window.location.href = `/letter.html?amount=${amount}`;
+        // 이벤트 리스너 추가
+        textarea.addEventListener('input', limitInput);
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && this.value.split('\n').length >= 2) {
+                e.preventDefault();
             }
         });
     </script>
