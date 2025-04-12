@@ -214,6 +214,15 @@
                 e.target.setSelectionRange(newPosition, newPosition);
             }
         });
+
+        // 다음 버튼 클릭 이벤트 추가
+        nextButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const amount = amountInput.value.replace(/[^\d]/g, '');
+            if (amount) {
+                window.location.href = `/letter.html?amount=${amount}`;
+            }
+        });
     </script>
 </body>
 </html>
