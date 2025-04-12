@@ -214,19 +214,36 @@
         async function shareContent(event) {
             event.preventDefault();
             
-            if (navigator.share) {
+            const shareData = {
+                title: '송금 카드 만들기',
+                text: '나만의 송금 카드를 만들어보세요!',
+                url: window.location.origin
+            };
+
+            // iOS Safari 체크
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            if (navigator.share && !(isIOS && isSafari)) {
                 try {
-                    await navigator.share({
-                        title: '송금 카드 만들기',
-                        text: '나만의 송금 카드를 만들어보세요!',
-                        url: window.location.origin
-                    });
+                    await navigator.share(shareData);
                 } catch (error) {
                     console.log('공유하기 실패:', error);
+                    fallbackShare();
                 }
             } else {
-                alert('공유하기가 지원되지 않는 브라우저입니다.');
+                fallbackShare();
             }
+        }
+
+        function fallbackShare() {
+            // 클립보드에 복사
+            const shareText = '송금 카드 만들기\n나만의 송금 카드를 만들어보세요!\n' + window.location.origin;
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert('링크가 클립보드에 복사되었습니다.\n원하는 앱에서 붙여넣기 해주세요.');
+            }).catch(() => {
+                alert('공유하기가 지원되지 않는 브라우저입니다.');
+            });
         }
     </script>
 </body>
