@@ -143,6 +143,15 @@
             text-align: center;
             font-size: 16px;
         }
+
+        @keyframes slideLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-219vw);  /* (53vw + 20px gap) * 3 cards */
+            }
+        }
     </style>
 </head>
 <body>
@@ -152,20 +161,54 @@
     </div>
     <div class="back-button">←</div>
     <div class="container">
-        <div class="title">나만의</div>
-        <div class="title">송금 카드 만들기</div>
-        <div class="subtitle">송금할 때 편지 쓰면<br>AI가 나만의 카드로 만들어 드려요</div>
+        <div class="title">나만의 송금 카드</div>
+        <div class="title">만드는 중..</div>
+        <div class="subtitle">최대 3분정도 걸릴 수 있어요.<br>완료되면 바로 알림을 보내드릴게요.</div>
         <div class="cards-grid">
             <div class="card-wrapper">
                 <div class="card blue-bg">
                     <img src="images/intro1.jpeg" alt="Card Image">
                     <div class="card-text">성훈아<br>생일 축하해~!</div>
                 </div>
+                <div class="card purple-bg">
+                    <img src="images/intro2.jpeg" alt="Card Image">
+                    <div class="card-text">아빠 이번달<br>용돈이에요~</div>
+                </div>
+                <div class="card pink-bg">
+                    <img src="images/intro3.jpeg" alt="Card Image">
+                    <div class="card-text">결혼 축하드립니다<br>행복하세요</div>
+                </div>
+                <!-- 무한 롤링을 위한 복제 -->
+                <div class="card blue-bg">
+                    <img src="images/intro1.jpeg" alt="Card Image">
+                    <div class="card-text">성훈아<br>생일 축하해~!</div>
+                </div>
+                <div class="card purple-bg">
+                    <img src="images/intro2.jpeg" alt="Card Image">
+                    <div class="card-text">아빠 이번달<br>용돈이에요~</div>
+                </div>
+                <div class="card pink-bg">
+                    <img src="images/intro3.jpeg" alt="Card Image">
+                    <div class="card-text">결혼 축하드립니다<br>행복하세요</div>
+                </div>
+                <!-- 무한 롤링을 위한 복제 -->
+                <div class="card blue-bg">
+                    <img src="images/intro1.jpeg" alt="Card Image">
+                    <div class="card-text">성훈아<br>생일 축하해~!</div>
+                </div>
+                <div class="card purple-bg">
+                    <img src="images/intro2.jpeg" alt="Card Image">
+                    <div class="card-text">아빠 이번달<br>용돈이에요~</div>
+                </div>
+                <div class="card pink-bg">
+                    <img src="images/intro3.jpeg" alt="Card Image">
+                    <div class="card-text">결혼 축하드립니다<br>행복하세요</div>
+                </div>
             </div>
         </div>
     </div>
     <div class="button" onclick="window.location.href='amount.html'">
-        <a href="#">송금 카드 만들기</a>
+        <a href="#">친구에게도 알려주기</a>
     </div>
 </body>
 </html>
