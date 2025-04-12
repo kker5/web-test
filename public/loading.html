@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest/manifest.json">
+    <title>송금 카드 만들기</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #EFF6FE;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status-bar .time {
+            flex: 1;
+        }
+
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 44px;
+            left: 0;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .cards-grid {
+            display: flex;
+            overflow: hidden;
+            margin: 0 -8px;
+            padding: 0 8px;
+            height: 33vh;
+            position: relative;
+        }
+
+        .card-wrapper {
+            display: flex;
+            animation: slideLeft 15s linear infinite;
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            width: 53vw;
+            height: 33vh;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card.blue-bg {
+            background-image: url('images/intro_card_blue.png');
+        }
+
+        .card.purple-bg {
+            background-image: url('images/intro_card_purple.png');
+        }
+
+        .card.pink-bg {
+            background-image: url('images/intro_card_pink.png');
+        }
+
+        .card img {
+            width: 88%;
+            height: 88%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .card-text {
+            color: #ffffff;
+            padding: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+            text-align: center;
+            width: 100%;
+            background: transparent;
+        }
+
+        .button {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .button a {
+            display: block;
+            background-color: #FFD600;
+            color: #000000;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">●●●</div>
+    </div>
+    <div class="back-button">←</div>
+    <div class="container">
+        <div class="title">나만의</div>
+        <div class="title">송금 카드 만들기</div>
+        <div class="subtitle">송금할 때 편지 쓰면<br>AI가 나만의 카드로 만들어 드려요</div>
+        <div class="cards-grid">
+            <div class="card-wrapper">
+                <div class="card blue-bg">
+                    <img src="images/intro1.jpeg" alt="Card Image">
+                    <div class="card-text">성훈아<br>생일 축하해~!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button" onclick="window.location.href='amount.html'">
+        <a href="#">송금 카드 만들기</a>
+    </div>
+</body>
+</html>
