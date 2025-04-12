@@ -247,8 +247,22 @@
         // 이벤트 리스너 추가
         textarea.addEventListener('input', limitInput);
         textarea.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && this.value.split('\n').length >= 2) {
-                e.preventDefault();
+            const lines = this.value.split('\n');
+            if (e.key === 'Enter') {
+                if (lines.length >= 2) {
+                    // 이미 2줄인 경우 Enter 키 방지
+                    e.preventDefault();
+                } else {
+                    // 첫 번째 줄에서 Enter 키 입력 시 두 번째 줄로 이동
+                    e.preventDefault();
+                    const firstLine = lines[0];
+                    const remainingChars = firstLine.slice(11); // 첫 번째 줄의 남은 문자들
+                    if (remainingChars) {
+                        this.value = firstLine.slice(0, 11) + '\n' + remainingChars;
+                    } else {
+                        this.value = firstLine + '\n';
+                    }
+                }
             }
         });
     </script>
