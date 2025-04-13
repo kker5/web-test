@@ -64,71 +64,26 @@
             line-height: 1.5;
         }
 
-        .cards-grid {
-            display: flex;
-            overflow: hidden;
-            margin: 0 -8px;
-            padding: 0 8px;
-            height: 36vh;
-            position: relative;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .card-wrapper {
-            display: flex;
-            animation: slideLeft 15s linear infinite;
-            gap: 20px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
         .card {
             background: #ffffff;
-            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            width: 58vw;
-            height: 36vh;
+            width: 41vw;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 0px;
             box-sizing: border-box;
             background-size: cover;
             background-position: center;
         }
 
-        .card.blue-bg {
-            background-image: url('images/intro_card_blue.png');
-        }
-
-        .card.purple-bg {
-            background-image: url('images/intro_card_purple.png');
-        }
-
-        .card.pink-bg {
-            background-image: url('images/intro_card_pink.png');
-        }
-
         .card img {
-            width: 88%;
-            height: 88%;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-
-        .card-text {
-            color: #ffffff;
-            padding: 12px;
-            font-size: 15px;
-            line-height: 1.4;
-            text-align: center;
             width: 100%;
-            background: transparent;
+            height: 100%;
+            object-fit: cover;
         }
 
         .button {
@@ -161,13 +116,8 @@
         <div class="title">송금 카드가</div>
         <div class="title">완성됐어요!</div>
         <div class="subtitle"></div>
-        <div class="cards-grid">
-            <div class="card-wrapper">
-                <div class="card">
-                    <img alt="Card Image">
-                    <div class="card-text">성훈아<br>생일 축하해~!</div>
-                </div>
-            </div>
+        <div class="card">
+            <img alt="Card Image">
         </div>
     </div>
     <div class="button" onclick="window.location.href='intro.html'">
@@ -178,23 +128,12 @@
         const urlParams = new URLSearchParams(window.location.search);
         const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
-        const category= urlParams.get('category');
+        const category = urlParams.get('category');
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {
             const cardImage = document.querySelector('.card img');
             cardImage.src = imageUrl;
-            const cardText = document.querySelector('.card-text');
-            cardText.innerHTML = letter.replace(/\n/g, '<br>');
-            const card = document.querySelector('.card');
-            // 카테고리별로 배경 이미지 설정
-            if (category === 'wedding') {
-                card.classList.add('purple-bg');
-            } else if (category === 'birthday') {
-                card.classList.add('pink-bg');
-            } else {
-                card.classList.add('blue-bg');
-            }
         }
         )
 
