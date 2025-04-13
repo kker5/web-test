@@ -217,6 +217,7 @@
         // URL에서 letter 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
         const letter = urlParams.get('letter');
+        const amount = urlParams.get('amount');
 
         /*
         curl -X POST https://erlklxz6gybzmki6rm2ww5pdve0olugs.lambda-url.us-west-2.on.aws/ \
@@ -249,7 +250,8 @@
                     // API 호출이 성공하면 complete.html로 이동
                     window.location.href = '/complete.html?category=' + encodeURIComponent(category) 
                     + '&letter=' + encodeURIComponent(letter) 
-                    + '&img=' + encodeURIComponent(imageUrl);
+                    + '&img=' + encodeURIComponent(imageUrl)
+                    + '&amount=' + encodeURIComponent(amount);
                 } catch (error) {
                     console.error('API 호출 중 오류 발생:', error);
                 }
