@@ -176,7 +176,7 @@
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
         const amount = urlParams.get('amount');
-        
+
         // 선택 완료 처리 함수
         function handleComplete() {
             const selectedCard = document.querySelector('.card.selected');
@@ -185,10 +185,10 @@
                 return;
             }
             const selectedImageUrl = selectedCard.querySelector('img').src;
-            window.location.href = '/complete.html?category=' + encodeURIComponent(category) 
-                    + '&letter=' + encodeURIComponent(letter) 
-                    + '&img=' + encodeURIComponent(imageUrl)
-                    + '&amount=' + encodeURIComponent(amount);
+            window.location.href = '/complete.html?category=' + encodeURIComponent(category)
+                + '&letter=' + encodeURIComponent(letter)
+                + '&img=' + encodeURIComponent(selectedImageUrl)
+                + '&amount=' + encodeURIComponent(amount);
         }
 
         // 페이지 로드시 이미지 출력, letter 출력
@@ -209,26 +209,26 @@
                 if (!response.ok) {
                     throw new Error('API 호출 실패');
                 }
-                
+
                 const data = await response.json();
                 const cardsContainer = document.querySelector('.cards-container');
-                
+
                 // 기존 카드 제거
                 cardsContainer.innerHTML = '';
-                
+
                 // 데이터의 각 항목에 대해 카드를 병렬로 생성
                 await Promise.all(data.map(async item => {
                     const card = document.createElement('div');
                     card.className = 'card';
-                    
+
                     const checkbox = document.createElement('div');
                     checkbox.className = 'checkbox';
-                    
+
                     const img = document.createElement('img');
                     img.src = item.image_url;
                     img.alt = 'Card Image';
                     console.log(item.image_url);
-                    
+
                     card.appendChild(checkbox);
                     card.appendChild(img);
                     cardsContainer.appendChild(card);
