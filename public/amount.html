@@ -39,6 +39,8 @@
             left: 0;
             padding: 20px;
             cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .container {
@@ -152,11 +154,8 @@
     </style>
 </head>
 <body>
-    <div class="status-bar">
-        <div class="time">9:41</div>
-        <div class="icons">●●●</div>
-    </div>
-    <div class="back-button">←</div>
+    <div class="back-button" onclick="window.history.back()">←</div>
+    <div class="status-bar"></div>
     <div class="container">
         <div class="profile-section">
             <div class="profile-image">

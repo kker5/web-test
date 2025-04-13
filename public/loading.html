@@ -40,6 +40,8 @@
             left: 0;
             padding: 20px;
             cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .container {
@@ -159,11 +161,8 @@
 </head>
 
 <body>
-    <div class="status-bar">
-        <div class="time">9:41</div>
-        <div class="icons">●●●</div>
-    </div>
-    <div class="back-button">←</div>
+    <div class="back-button" onclick="window.history.back()">←</div>
+    <div class="status-bar"></div>
     <div class="container">
         <div class="title">나만의 송금 카드</div>
         <div class="title">만드는 중..</div>
