@@ -67,14 +67,19 @@
             overflow: hidden;
             margin: 0 -8px;
             padding: 0 8px;
-            height: 33vh;
+            height: 36vh;
             position: relative;
+            justify-content: center;
+            align-items: center;
         }
 
         .card-wrapper {
             display: flex;
             animation: slideLeft 15s linear infinite;
             gap: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .card {
@@ -82,8 +87,8 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            width: 53vw;
-            height: 33vh;
+            width: 58vw;
+            height: 36vh;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
@@ -159,7 +164,7 @@
         <div class="subtitle"></div>
         <div class="cards-grid">
             <div class="card-wrapper">
-                <div class="card blue-bg">
+                <div class="card">
                     <img alt="Card Image">
                     <div class="card-text">성훈아<br>생일 축하해~!</div>
                 </div>
@@ -175,11 +180,16 @@
         const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
         // 페이지 로드시 이미지 출력, letter 출력
+        // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {
             const cardImage = document.querySelector('.card img');
             cardImage.src = imageUrl;
             const cardText = document.querySelector('.card-text');
             cardText.textContent = letter;
+            const card = document.querySelector('.card');
+            // blue-bg purple-bg pink-bg 중 랜덤으로 선택
+            const randomBg = ['blue-bg', 'purple-bg', 'pink-bg'][Math.floor(Math.random() * 3)];
+            card.classList.add(randomBg);
         }
         )
 
