@@ -131,17 +131,6 @@
             background: transparent;
         }
 
-        .view-more {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .view-more a {
-            color: #000;
-            text-decoration: underline;
-            font-size: 16px;
-        }
-
         .button {
             position: fixed;
             bottom: 0;
@@ -180,9 +169,6 @@
                 </div>
             </div>
         </div>
-        <div class="view-more">
-            <a href="#" id="viewMoreLink">다른 이미지 보기</a>
-        </div>
     </div>
     <div class="button" onclick="window.location.href='intro.html'">
         <a href="#">처음으로...(공사중)</a>
@@ -192,12 +178,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
-        const category = urlParams.get('category');
-
-        // 다른 이미지 보기 링크 설정
-        const viewMoreLink = document.getElementById('viewMoreLink');
-        viewMoreLink.href = `recommend.html?img=${encodeURIComponent(imageUrl)}&letter=${encodeURIComponent(letter)}&category=${encodeURIComponent(category)}`;
-
+        const category= urlParams.get('category');
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {

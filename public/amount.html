@@ -211,6 +211,8 @@
             const amount = amountInput.value.replace(/[^\d]/g, '');
             if (amount) {
                 window.location.href = `/letter.html?amount=${amount}`;
+            } else {
+                alert('금액을 입력해주세요.');
             }
         });
     </script>
