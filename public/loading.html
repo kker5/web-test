@@ -244,9 +244,12 @@
                     // 응답 json의 imageUrl 추출
                     const data = await response.json();
                     const imageUrl = data.imageUrl;
+                    const category = data.category;
 
                     // API 호출이 성공하면 complete.html로 이동
-                    window.location.href = '/complete.html?letter=' + encodeURIComponent(letter) + '&img=' + encodeURIComponent(imageUrl);
+                    window.location.href = '/complete.html?category=' + encodeURIComponent(category) 
+                    + '&letter=' + encodeURIComponent(letter) 
+                    + '&img=' + encodeURIComponent(imageUrl);
                 } catch (error) {
                     console.error('API 호출 중 오류 발생:', error);
                 }

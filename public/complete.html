@@ -178,17 +178,23 @@
         const urlParams = new URLSearchParams(window.location.search);
         const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
+        const category= urlParams.get('category');
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {
             const cardImage = document.querySelector('.card img');
             cardImage.src = imageUrl;
             const cardText = document.querySelector('.card-text');
-            cardText.textContent = letter;
+            cardText.innerHTML = letter.replace(/\n/g, '<br>');
             const card = document.querySelector('.card');
             // blue-bg purple-bg pink-bg 중 랜덤으로 선택
-            const randomBg = ['blue-bg', 'purple-bg', 'pink-bg'][Math.floor(Math.random() * 3)];
-            card.classList.add(randomBg);
+            if (category === 'wedding') {
+                card.classList.add('purple-bg');
+            } else if (category === 'birthday') {
+                card.classList.add('pink-bg');
+            } else {
+                card.classList.add('blue-bg');
+            }
         }
         )
 
