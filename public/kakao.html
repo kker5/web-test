@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest/manifest.json">
+    <title>송금 카드 만들기</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #EFF6FE;
+            background-image: url('/images/kakao_bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status-bar .time {
+            flex: 1;
+        }
+
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .container {
+            position: absolute;
+            top: 20%;
+            left: 4%;
+            width: 70%;
+            height: 40%;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 5px;
+        }
+
+        .text-content {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-align: left;
+            color: #000000;
+        }
+
+        .description {
+            font-size: 14px;
+            text-align: left;
+            color: #8F8F8F;
+        }
+
+        .send-button {
+            width: 100%;
+            background: #F2F2F2;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .kakao-pay-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="status-bar"></div>
+    <div class="container">
+        <img class="image-placeholder" alt="송금 이미지">
+        <div class="text-content">
+            <div class="title">송금봉투가 도착했어요.</div>
+            <div class="description">송금 받기 전까지 보낸 분은 내역 상세화면에서 취소할 수 있어요.</div>
+        </div>
+        <button class="send-button">
+            송금 받기
+        </button>
+    </div>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const imageUrl = urlParams.get('img');
+            
+            if (imageUrl) {
+                const imagePlaceholder = document.querySelector('.image-placeholder');
+                imagePlaceholder.src = imageUrl;
+            }
+        }
+    </script>
+</body>
+</html>
