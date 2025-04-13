@@ -166,18 +166,19 @@
                 // 기존 카드 제거
                 cardsContainer.innerHTML = '';
                 
-                // 데이터의 각 항목에 대해 카드 생성
-                data.forEach(item => {
+                // 데이터의 각 항목에 대해 카드를 병렬로 생성
+                await Promise.all(data.map(async item => {
                     const card = document.createElement('div');
                     card.className = 'card';
                     
                     const img = document.createElement('img');
                     img.src = item.image_url;
                     img.alt = 'Card Image';
-                    console.log(item.image_url)
+                    console.log(item.image_url);
+                    
                     card.appendChild(img);
                     cardsContainer.appendChild(card);
-                });
+                }));
 
             } catch (error) {
                 console.error('API 호출 중 오류 발생:', error);
