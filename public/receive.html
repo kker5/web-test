@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest/manifest.json">
     <title>송금 카드 만들기</title>
+    <script src="js/categoryBackground.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -190,13 +191,7 @@
             cardText.innerHTML = letter.replace(/\n/g, '<br>');
             const card = document.querySelector('.card');
             // 카테고리별로 배경 이미지 설정
-            if (category === 'wedding') {
-                card.classList.add('purple-bg');
-            } else if (category === 'birthday') {
-                card.classList.add('pink-bg');
-            } else {
-                card.classList.add('blue-bg');
-            }
+            setElementBackground(card, category);
 
             // amount 텍스트 설정
             const amountText = document.getElementById('amountText');

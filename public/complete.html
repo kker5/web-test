@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest/manifest.json">
     <title>송금 카드 만들기</title>
+    <script src="js/categoryBackground.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -196,10 +197,10 @@
         const amount = urlParams.get('amount');
         // 다른 이미지 보기 링크 설정
         const viewMoreLink = document.getElementById('viewMoreLink');
-        viewMoreLink.href = '/recommend.html?category=' + encodeURIComponent(category) 
-                    + '&letter=' + encodeURIComponent(letter) 
-                    + '&img=' + encodeURIComponent(imageUrl)
-                    + '&amount=' + encodeURIComponent(amount);
+        viewMoreLink.href = '/recommend.html?category=' + encodeURIComponent(category)
+            + '&letter=' + encodeURIComponent(letter)
+            + '&img=' + encodeURIComponent(imageUrl)
+            + '&amount=' + encodeURIComponent(amount);
 
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
@@ -210,13 +211,7 @@
             cardText.innerHTML = letter.replace(/\n/g, '<br>');
             const card = document.querySelector('.card');
             // 카테고리별로 배경 이미지 설정
-            if (category === 'wedding') {
-                card.classList.add('purple-bg');
-            } else if (category === 'birthday') {
-                card.classList.add('pink-bg');
-            } else {
-                card.classList.add('blue-bg');
-            }
+            setElementBackground(card, category);
 
             // 카테고리별로 버튼 텍스트 설정
             const buttonText = document.querySelector('.button a');
@@ -225,12 +220,12 @@
         )
 
         // 다음 버튼 클릭 이벤트 추가
-        nextButton.addEventListener('click', function(e) {
+        nextButton.addEventListener('click', function (e) {
             e.preventDefault();
-            window.location.href = '/send.html?category=' + encodeURIComponent(category) 
-                    + '&letter=' + encodeURIComponent(letter) 
-                    + '&img=' + encodeURIComponent(imageUrl)
-                    + '&amount=' + encodeURIComponent(amount);
+            window.location.href = '/send.html?category=' + encodeURIComponent(category)
+                + '&letter=' + encodeURIComponent(letter)
+                + '&img=' + encodeURIComponent(imageUrl)
+                + '&amount=' + encodeURIComponent(amount);
         });
 
     </script>
