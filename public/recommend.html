@@ -175,7 +175,8 @@
         const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
-
+        const amount = urlParams.get('amount');
+        
         // 선택 완료 처리 함수
         function handleComplete() {
             const selectedCard = document.querySelector('.card.selected');
@@ -184,7 +185,10 @@
                 return;
             }
             const selectedImageUrl = selectedCard.querySelector('img').src;
-            window.location.href = `complete.html?img=${encodeURIComponent(selectedImageUrl)}&letter=${encodeURIComponent(letter)}&category=${encodeURIComponent(category)}`;
+            window.location.href = '/complete.html?category=' + encodeURIComponent(category) 
+                    + '&letter=' + encodeURIComponent(letter) 
+                    + '&img=' + encodeURIComponent(imageUrl)
+                    + '&amount=' + encodeURIComponent(amount);
         }
 
         // 페이지 로드시 이미지 출력, letter 출력

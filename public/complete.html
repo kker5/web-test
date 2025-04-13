@@ -196,7 +196,10 @@
         const amount = urlParams.get('amount');
         // 다른 이미지 보기 링크 설정
         const viewMoreLink = document.getElementById('viewMoreLink');
-        viewMoreLink.href = `recommend.html?img=${encodeURIComponent(imageUrl)}&letter=${encodeURIComponent(letter)}&category=${encodeURIComponent(category)}`;
+        viewMoreLink.href = '/recommend.html?category=' + encodeURIComponent(category) 
+                    + '&letter=' + encodeURIComponent(letter) 
+                    + '&img=' + encodeURIComponent(imageUrl)
+                    + '&amount=' + encodeURIComponent(amount);
 
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
