@@ -169,8 +169,9 @@
     <div class="back-button" onclick="window.history.back()">←</div>
     <div class="status-bar"></div>
     <div class="container">
-        <div class="title">송금 카드가</div>
-        <div class="title">완성됐어요!</div>
+        <div class="title">안성훈님에게</div>
+        <div class="title" id="amountText">0원과 함께</div>
+        <div class="title">보낼까요?</div>
         <div class="subtitle"></div>
         <div class="cards-grid">
             <div class="card-wrapper">
@@ -181,11 +182,11 @@
             </div>
         </div>
         <div class="view-more">
-            <a href="#" id="viewMoreLink">다른 이미지 보기</a>
+            <div class="subtitle">송금액과 카드가 함께 보내져요.</div>
         </div>
     </div>
     <div class="button" onclick="window.location.href='intro.html'">
-        <a href="#">다음</a>
+        <a href="#">보내기</a>
     </div>
     <script>
         // URL에서 letter 파라미터 추출
@@ -193,10 +194,7 @@
         const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
-
-        // 다른 이미지 보기 링크 설정
-        const viewMoreLink = document.getElementById('viewMoreLink');
-        viewMoreLink.href = `recommend.html?img=${encodeURIComponent(imageUrl)}&letter=${encodeURIComponent(letter)}&category=${encodeURIComponent(category)}`;
+        const amount = urlParams.get('amount');
 
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
@@ -215,9 +213,10 @@
                 card.classList.add('blue-bg');
             }
 
-            // 카테고리별로 버튼 텍스트 설정
-            const buttonText = document.querySelector('.button a');
-            buttonText.textContent = '다음 (' + category + ')';
+            // amount 텍스트 설정
+            const amountText = document.getElementById('amountText');
+            const formattedAmount = Number(amount).toLocaleString('ko-KR');
+            amountText.textContent = formattedAmount + '원과 함께';
         }
         )
 
