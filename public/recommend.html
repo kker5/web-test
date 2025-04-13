@@ -91,6 +91,39 @@
             box-sizing: border-box;
             background-size: cover;
             background-position: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card.selected {
+            border: 3px solid #ffffff;
+        }
+
+        .checkbox {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgb(0, 0, 0);
+            border: 2px solid #FFD600;
+            display: none;
+            z-index: 1;
+        }
+
+        .card.selected .checkbox {
+            display: block;
+        }
+
+        .checkbox::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            font-weight: bold;
         }
 
         .card img {
@@ -172,13 +205,27 @@
                     const card = document.createElement('div');
                     card.className = 'card';
                     
+                    const checkbox = document.createElement('div');
+                    checkbox.className = 'checkbox';
+                    
                     const img = document.createElement('img');
                     img.src = item.image_url;
                     img.alt = 'Card Image';
                     console.log(item.image_url);
                     
+                    card.appendChild(checkbox);
                     card.appendChild(img);
                     cardsContainer.appendChild(card);
+
+                    // 카드 클릭 이벤트 처리
+                    card.addEventListener('click', () => {
+                        // 모든 카드에서 selected 클래스 제거
+                        document.querySelectorAll('.card').forEach(c => {
+                            c.classList.remove('selected');
+                        });
+                        // 클릭된 카드에 selected 클래스 추가
+                        card.classList.add('selected');
+                    });
                 }));
 
             } catch (error) {
