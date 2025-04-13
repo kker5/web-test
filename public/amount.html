@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -153,6 +154,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="back-button" onclick="window.history.back()">←</div>
     <div class="status-bar"></div>
@@ -165,12 +167,8 @@
         </div>
         <div class="title">얼마를 담아</div>
         <div class="title">보낼까요?</div>
-        <input type="text" 
-               pattern="[0-9]*" 
-               inputmode="numeric" 
-               class="amount-input" 
-               id="amountInput" 
-               placeholder="보낼 금액">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" class="amount-input" id="amountInput"
+            placeholder="보낼 금액">
     </div>
     <div class="button">
         <a href="#" id="nextButton">다음</a>
@@ -187,14 +185,14 @@
             return new Intl.NumberFormat('ko-KR').format(numericValue);
         }
 
-        amountInput.addEventListener('input', function(e) {
+        amountInput.addEventListener('input', function (e) {
             const cursorPosition = e.target.selectionStart;
             const originalLength = e.target.value.length;
-            
+
             // 현재 값에서 숫자만 추출
             let value = e.target.value.replace(/[^\d]/g, '');
             if (value.length > 9) value = value.slice(0, 9);
-            
+
             if (value) {
                 const formattedValue = formatCurrency(value) + '원';
                 e.target.value = formattedValue;
@@ -206,7 +204,7 @@
         });
 
         // 다음 버튼 클릭 이벤트 추가
-        nextButton.addEventListener('click', function(e) {
+        nextButton.addEventListener('click', function (e) {
             e.preventDefault();
             const amount = amountInput.value.replace(/[^\d]/g, '');
             if (amount) {
@@ -217,4 +215,5 @@
         });
     </script>
 </body>
+
 </html>

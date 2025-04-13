@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,9 +98,9 @@
             width: 24px;
             height: 24px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="status-bar"></div>
     <div class="container">
@@ -108,20 +109,34 @@
             <div class="title">송금봉투가 도착했어요.</div>
             <div class="description">송금 받기 전까지 보낸 분은 내역 상세화면에서 취소할 수 있어요.</div>
         </div>
-        <button class="send-button">
+        <button class="send-button" id="sendButton">
             송금 받기
         </button>
     </div>
     <script>
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const imageUrl = urlParams.get('img');
-            
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('img');
+        const letter = urlParams.get('letter');
+        const category = urlParams.get('category');
+        const amount = urlParams.get('amount');
+        
+        window.onload = function () {
             if (imageUrl) {
                 const imagePlaceholder = document.querySelector('.image-placeholder');
                 imagePlaceholder.src = imageUrl;
             }
         }
+
+        // 송금 받기 버튼 클릭 이벤트 추가
+        sendButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log(category);
+            window.location.href = '/receive.html?category=' + encodeURIComponent(category)
+                + '&letter=' + encodeURIComponent(letter)
+                + '&img=' + encodeURIComponent(imageUrl)
+                + '&amount=' + encodeURIComponent(amount);
+        });
     </script>
 </body>
+
 </html>
