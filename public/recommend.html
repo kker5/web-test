@@ -166,8 +166,8 @@
             <!-- 카드들이 여기에 동적으로 추가됩니다 -->
         </div>
     </div>
-    <div class="button" onclick="window.location.href='intro.html'">
-        <a href="#">처음으로...(공사중)</a>
+    <div class="button">
+        <a href="#" onclick="handleComplete()">선택 완료</a>
     </div>
     <script>
         // URL에서 letter 파라미터 추출
@@ -175,6 +175,18 @@
         const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
+
+        // 선택 완료 처리 함수
+        function handleComplete() {
+            const selectedCard = document.querySelector('.card.selected');
+            if (!selectedCard) {
+                alert('이미지를 선택해주세요.');
+                return;
+            }
+            const selectedImageUrl = selectedCard.querySelector('img').src;
+            window.location.href = `complete.html?img=${encodeURIComponent(selectedImageUrl)}&letter=${encodeURIComponent(letter)}&category=${encodeURIComponent(category)}`;
+        }
+
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {
