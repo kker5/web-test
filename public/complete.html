@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -143,9 +144,9 @@
             text-align: center;
             font-size: 16px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="status-bar">
         <div class="time">9:41</div>
@@ -159,7 +160,7 @@
         <div class="cards-grid">
             <div class="card-wrapper">
                 <div class="card blue-bg">
-                    <img src="images/intro1.jpeg" alt="Card Image">
+                    <img alt="Card Image">
                     <div class="card-text">성훈아<br>생일 축하해~!</div>
                 </div>
             </div>
@@ -168,5 +169,21 @@
     <div class="button" onclick="window.location.href='amount.html'">
         <a href="#">송금 카드 만들기</a>
     </div>
+    <script>
+        // URL에서 letter 파라미터 추출
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('img');
+        const letter = urlParams.get('letter');
+        // 페이지 로드시 이미지 출력, letter 출력
+        window.addEventListener('load', async () => {
+            const cardImage = document.querySelector('.card img');
+            cardImage.src = imageUrl;
+            const cardText = document.querySelector('.card-text');
+            cardText.textContent = letter;
+        }
+        )
+
+    </script>
 </body>
+
 </html>

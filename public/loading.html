@@ -242,9 +242,12 @@
                     if (!response.ok) {
                         throw new Error('API 호출 실패');
                     }
+                    // 응답 json의 imageUrl 추출
+                    const data = await response.json();
+                    const imageUrl = data.imageUrl;
 
                     // API 호출이 성공하면 complete.html로 이동
-                    window.location.href = '/complete.html';
+                    window.location.href = '/complete.html?letter=' + encodeURIComponent(letter) + '&img=' + encodeURIComponent(imageUrl);
                 } catch (error) {
                     console.error('API 호출 중 오류 발생:', error);
                 }
