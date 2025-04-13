@@ -47,6 +47,18 @@
         .container {
             padding: 0 20px;
             margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .title {
@@ -68,8 +80,8 @@
             background: #ffffff;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            width: 41vw;
-            flex-shrink: 0;
+            width: 100%;
+            aspect-ratio: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -116,8 +128,8 @@
         <div class="title">송금 카드가</div>
         <div class="title">완성됐어요!</div>
         <div class="subtitle"></div>
-        <div class="card">
-            <img alt="Card Image">
+        <div class="cards-container">
+            <!-- 카드들이 여기에 동적으로 추가됩니다 -->
         </div>
     </div>
     <div class="button" onclick="window.location.href='intro.html'">
@@ -132,10 +144,45 @@
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {
-            const cardImage = document.querySelector('.card img');
-            cardImage.src = imageUrl;
-        }
-        )
+            try {
+                const response = await fetch('https://osdxchxnaxerpwkc2ynp4s5nt40zgvxu.lambda-url.us-west-2.on.aws/recommendation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        prompt: letter
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('API 호출 실패');
+                }
+                
+                const data = await response.json();
+                const cardsContainer = document.querySelector('.cards-container');
+                
+                // 기존 카드 제거
+                cardsContainer.innerHTML = '';
+                
+                // 데이터의 각 항목에 대해 카드 생성
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    const img = document.createElement('img');
+                    img.src = item.image_url;
+                    img.alt = 'Card Image';
+                    console.log(item.image_url)
+                    card.appendChild(img);
+                    cardsContainer.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error('API 호출 중 오류 발생:', error);
+            }
+        });
 
     </script>
 </body>
