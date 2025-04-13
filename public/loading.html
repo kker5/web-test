@@ -215,6 +215,42 @@
         <a href="#" onclick="shareContent(event)">친구에게도 알려주기</a>
     </div>
     <script>
+        // URL에서 letter 파라미터 추출
+        const urlParams = new URLSearchParams(window.location.search);
+        const letter = urlParams.get('letter');
+
+        /*
+        curl -X POST https://erlklxz6gybzmki6rm2ww5pdve0olugs.lambda-url.us-west-2.on.aws/ \
+        -H "Content-Type: application/json" \
+        -d '{"message": "결혼 축하해~"}'
+        */
+        // 페이지 로드 시 API 호출
+        window.addEventListener('load', async () => {
+            if (letter) {
+                try {
+                    const response = await fetch('https://erlklxz6gybzmki6rm2ww5pdve0olugs.lambda-url.us-west-2.on.aws', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        mode: 'cors',
+                        body: JSON.stringify({
+                            message: letter
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('API 호출 실패');
+                    }
+
+                    // API 호출이 성공하면 complete.html로 이동
+                    window.location.href = '/complete.html';
+                } catch (error) {
+                    console.error('API 호출 중 오류 발생:', error);
+                }
+            }
+        });
+
         async function shareContent(event) {
             event.preventDefault();
 
