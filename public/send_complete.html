@@ -11,84 +11,28 @@
     <style>
         .container {
             padding: 0 20px;
+            margin-top: 40%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            gap: 20px;
         }
 
-        .check-circle {
-            width: 120px;
-            height: 120px;
-            background-color: #FFE500;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .check-mark {
-            width: 50px;
-            height: 30px;
-            border-left: 8px solid #000;
-            border-bottom: 8px solid #000;
-            transform: rotate(-45deg);
-            margin-top: -10px;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            text-align: center;
-            line-height: 1.5;
-        }
-
-        .button {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-        }
-
-        .button a {
-            display: block;
-            background-color: #FFE500;
-            color: #000;
-            text-align: center;
-            padding: 16px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            cursor: pointer;
+        .check-image {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
     <div class="back-button" onclick="window.history.back()">←</div>
+    <div class="status-bar"></div>
     <div class="container">
-        <div class="check-circle">
-            <div class="check-mark"></div>
-        </div>
+        <img src="/images/check_circle.png" alt="완료" class="check-image">
         <div class="title">송금을 완료했어요</div>
-        <div class="subtitle" id="subtitleText">안성훈님에게 300,000원과<br>송금 카드를 보냈어요.</div>
+        <div class="subtitle" id="subtitleText">안성훈님에게 0원과<br>송금 카드를 보냈어요.</div>
     </div>
     <div class="button">
         <a href="#" id="nextButton">확인</a>
