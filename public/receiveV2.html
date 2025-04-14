@@ -117,7 +117,6 @@
 
         .card img {
             width: 100%;
-            /* height: 100%; */
             object-fit: cover;
             border-radius: 15px;
         }
@@ -130,17 +129,6 @@
             text-align: center;
             width: 100%;
             background: transparent;
-        }
-
-        .view-more {
-            text-align: center;
-            margin-top: 15%;
-        }
-
-        .view-more a {
-            color: #000;
-            text-decoration: underline;
-            font-size: 16px;
         }
 
         .button {
@@ -170,9 +158,9 @@
     <div class="back-button" onclick="window.history.back()">←</div>
     <div class="status-bar"></div>
     <div class="container">
-        <div class="title">안성훈님에게</div>
-        <div class="title" id="amountText">0원과 함께</div>
-        <div class="title">보낼까요?</div>
+        <div class="title">엄마에게</div>
+        <div class="title" id="amountText">0원을</div>
+        <div class="title">받았어요!</div>
         <div class="subtitle"></div>
         <div class="cards-grid">
             <div class="card-wrapper">
@@ -182,12 +170,9 @@
                 </div>
             </div>
         </div>
-        <div class="view-more">
-            <div class="subtitle">송금액과 카드가 함께 보내져요.</div>
-        </div>
     </div>
-    <div class="button">
-        <a href="#" id="nextButton">보내기</a>
+    <div class="button" onclick="window.location.href='kakaoV2.html'">
+        <a href="#">확인</a>
     </div>
     <script>
         // URL에서 letter 파라미터 추출
@@ -211,41 +196,9 @@
             // amount 텍스트 설정
             const amountText = document.getElementById('amountText');
             const formattedAmount = Number(amount).toLocaleString('ko-KR');
-            amountText.textContent = formattedAmount + '원과 함께';
+            amountText.textContent = formattedAmount + '원을';
         }
         )
-
-        // 다음 버튼 클릭 이벤트 추가
-        nextButton.addEventListener('click', async function (e) {
-            e.preventDefault();
-            try {
-                const response = await fetch('https://osdxchxnaxerpwkc2ynp4s5nt40zgvxu.lambda-url.us-west-2.on.aws/latest-transfer', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    body: JSON.stringify({
-                        letter: letter,
-                        amount: amount,
-                        category: category,
-                        imageUrl: imageUrl
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error('API 호출 실패');
-                }
-            } catch (error) {
-                console.error('API 호출 중 오류 발생:', error);
-            }
-            // window.location.href = '/kakao.html?category=' + encodeURIComponent(category)
-            //     + '&letter=' + encodeURIComponent(letter)
-            //     + '&img=' + encodeURIComponent(imageUrl)
-            //     + '&amount=' + encodeURIComponent(amount);
-            alert('송금 완료');
-            window.location.href = '/intro.html';
-        });
 
     </script>
 </body>

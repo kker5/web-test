@@ -6,7 +6,7 @@ const categoryBackgrounds = {
     'health': '/images/card_be_health.png',
     'thanks': '/images/card_be_thanks.png',
     'allowance': '/images/card_be_allowance.png',
-    'cheerup': '/images/card_be_cheerup.png',
+    'cheering': '/images/card_be_cheerup.png',
     'etc': '/images/card_be_default.png'
 };
 
