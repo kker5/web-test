@@ -218,15 +218,15 @@
                 cardsContainer.innerHTML = '';
 
                 // 데이터의 각 항목에 대해 카드를 병렬로 생성
-                addCard(imageUrl, cardsContainer);
-                await Promise.all(data.map(async item => addCard(item.image_url, cardsContainer)));
+                
+                await Promise.all(addCard(imageUrl, cardsContainer) + data.slice(0, 9).map(async item => addCard(item.image_url, cardsContainer)));
 
             } catch (error) {
                 console.error('API 호출 중 오류 발생:', error);
             }
         });
 
-        function addCard(image_url, cardsContainer) {
+        async function addCard(image_url, cardsContainer) {
             const card = document.createElement('div');
             card.className = 'card';
 
