@@ -70,13 +70,42 @@
 
         .view-more {
             text-align: center;
-            margin-top: 15%;
+            margin-top: 3%;
         }
 
-        .view-more a {
+        .edit-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: fit-content;
+            padding: 8px 16px;
+            background-color: #F2F2F2;
+            border: 1px solid #F2F2F2;
+            border-radius: 100px;
             color: #000;
-            text-decoration: underline;
-            font-size: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0 auto;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .edit-button::before {
+            content: "";
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-image: url("/images/rec_img_thumb.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 2px;
+        }
+
+        .edit-button:hover {
+            background-color: #fafafabc;
+            border-color: #ddd;
         }
     </style>
 </head>
@@ -96,7 +125,7 @@
             </div>
         </div>
         <div class="view-more">
-            <a href="#" id="viewMoreLink">다른 이미지 보기</a>
+            <button class="edit-button" id="editButton">추천 이미지 구경가기</button>
         </div>
     </div>
     <div class="button">
@@ -111,7 +140,7 @@
         const category = urlParams.get('category');
         const amount = urlParams.get('amount');
         // 다른 이미지 보기 링크 설정
-        const viewMoreLink = document.getElementById('viewMoreLink');
+        const editButton = document.getElementById('editButton');
         let viewMoreLinkHref = '/recommend.html?category=' + encodeURIComponent(category)
             + '&letter=' + encodeURIComponent(letter)
             + '&img=' + encodeURIComponent(imageUrl)
@@ -119,7 +148,9 @@
         if (selectedImageUrl) {
             viewMoreLinkHref += '&selected_img=' + encodeURIComponent(selectedImageUrl)
         }
-        viewMoreLink.href = viewMoreLinkHref
+        editButton.addEventListener('click', function () {
+            window.location.href = viewMoreLinkHref;
+        });
 
         // 페이지 로드시 이미지 출력, letter 출력
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
