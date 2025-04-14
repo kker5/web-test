@@ -85,9 +85,7 @@
     <div class="back-button" onclick="window.history.back()">←</div>
     <div class="status-bar"></div>
     <div class="container">
-        <div class="title">엄마에게</div>
-        <div class="title" id="amountText">0원을</div>
-        <div class="title">받았어요!</div>
+        <div class="title" id="amountText">엄마에게<br>>0원을<br>받았어요!</div>
         <div class="subtitle"></div>
         <div class="cards-grid">
             <div class="card-wrapper">
@@ -123,7 +121,7 @@
             // amount 텍스트 설정
             const amountText = document.getElementById('amountText');
             const formattedAmount = Number(amount).toLocaleString('ko-KR');
-            amountText.textContent = formattedAmount + '원을';
+            amountText.innerHTML = `엄마에게<br>${formattedAmount}원을<br>받았어요!`
         }
         )
 
