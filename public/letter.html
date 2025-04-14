@@ -149,6 +149,7 @@
         textarea.id = letterInput.id;
         textarea.placeholder = letterInput.placeholder;
         letterInput.parentNode.replaceChild(textarea, letterInput);
+        let saveOriginalText = false;
         let originalText = '';
 
         // 입력 제한 함수
@@ -249,6 +250,7 @@
 
         textarea.addEventListener('keydown', function (e) {
             const lines = this.value.split('\n');
+            saveOriginalText = true;
             if (e.key === 'Enter') {
                 if (lines.length >= 3) {
                     // 이미 3줄인 경우 Enter 키 방지
@@ -265,7 +267,6 @@
                     }
                 }
             }
-            originalText = this.value.replace(/\n/g, '');
         });
 
         // 다음 버튼 클릭 이벤트 추가
@@ -282,6 +283,10 @@
         // 편지 내용 수정 버튼 클릭 이벤트 추가
         const editButton = document.getElementById('editButton');
         editButton.addEventListener('click', async function () {
+            if (saveOriginalText) {
+                originalText = textarea.value;
+                saveOriginalText = false;
+            }
             const letterText = originalText || textarea.value;
             if (letterText.trim() != '') {
                 try {
