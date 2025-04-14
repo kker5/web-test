@@ -2,7 +2,7 @@
 const categoryBackgrounds = {
     'birthday': '/images/card_be_birthday.png',
     'wedding': '/images/card_be_wedding.png',
-    'dutch': '/images/card_be_calculate.png',
+    'cost settlement': '/images/card_be_calculate.png',
     'health': '/images/card_be_health.png',
     'thanks': '/images/card_be_thanks.png',
     'allowance': '/images/card_be_allowance.png',
