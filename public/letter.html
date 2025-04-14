@@ -76,6 +76,23 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
+        .edit-button {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 8px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 16px;
+            cursor: pointer;
+        }
+
+        .edit-button:hover {
+            background-color: #e8e8e8;
+        }
     </style>
 </head>
 
@@ -91,6 +108,7 @@
         </div>
         <div class="title">보내고 싶은<br>편지를 써보세요</div>
         <input type="text" class="letter-input" id="letterInput" placeholder="편지를 써보세요">
+        <button class="edit-button" id="editButton">편지 내용 수정</button>
     </div>
     <div class="button">
         <a href="#" id="nextButton">만들기</a>
@@ -203,6 +221,36 @@
                 return;
             }
             window.location.href = `/loading.html?amount=${amount}&letter=${encodeURIComponent(letterText)}`;
+        });
+
+        // 편지 내용 수정 버튼 클릭 이벤트 추가
+        const editButton = document.getElementById('editButton');
+        editButton.addEventListener('click', async function () {
+            const letterText = textarea.value;
+            if (letterText.trim() != '') {
+                try {
+                    const response = await fetch('https://msux254rnepfmpeh5wmdxclwyy0dicjm.lambda-url.us-west-2.on.aws', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: letterText
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('API 호출 실패');
+                    }
+
+                    const data = await response.json();
+                    const result = data.result;
+                    console.log('API 응답:', result);
+                    textarea.value = result;
+                } catch (error) {
+                    console.error('에러 발생:', error);
+                }
+            }
         });
     </script>
 </body>
