@@ -173,6 +173,7 @@
         // URL에서 letter 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
         const imageUrl = urlParams.get('img');
+        const recommendImageUrl = urlParams.get('recommend_img');
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
         const amount = urlParams.get('amount');
@@ -218,10 +219,18 @@
                 cardsContainer.innerHTML = '';
 
                 // 데이터의 각 항목에 대해 카드를 병렬로 생성
-
+                let fixedCards = [];
+                if (recommendImageUrl == imageUrl) {
+                    fixedCards = [addCard(imageUrl, cardsContainer, true)]
+                } else {
+                    fixedCards = [addCard(recommendImageUrl, cardsContainer, true)].concat([addCard(imageUrl, cardsContainer)])
+                }
+                console.log(fixedCards.length)
                 await Promise.all(
-                    addCard(imageUrl, cardsContainer, true) +
-                    data.filter(item => item.image_url != imageUrl).slice(0, 9).map(async item => addCard(item.image_url, cardsContainer))
+                    fixedCards +
+                    data.filter(item => item.image_url != imageUrl && item.image_url != recommendImageUrl)
+                        .slice(0, 10 - fixedCards.length)
+                        .map(async item => addCard(item.image_url, cardsContainer))
                 );
 
             } catch (error) {
