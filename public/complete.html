@@ -192,6 +192,7 @@
         // URL에서 letter 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
         const imageUrl = urlParams.get('img');
+        const recommendImageUrl = urlParams.get('recommend_img');
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
         const amount = urlParams.get('amount');
@@ -206,7 +207,7 @@
         // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {
             const cardImage = document.querySelector('.card img');
-            cardImage.src = imageUrl;
+            cardImage.src = recommendImageUrl || imageUrl;
             const cardText = document.querySelector('.card-text');
             cardText.innerHTML = letter.replace(/\n/g, '<br>');
             const card = document.querySelector('.card');
@@ -224,7 +225,7 @@
             e.preventDefault();
             window.location.href = '/send.html?category=' + encodeURIComponent(category)
                 + '&letter=' + encodeURIComponent(letter)
-                + '&img=' + encodeURIComponent(imageUrl)
+                + '&img=' + encodeURIComponent(recommendImageUrl || imageUrl)
                 + '&amount=' + encodeURIComponent(amount);
         });
 

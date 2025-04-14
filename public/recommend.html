@@ -187,7 +187,8 @@
             const selectedImageUrl = selectedCard.querySelector('img').src;
             window.location.href = '/complete.html?category=' + encodeURIComponent(category)
                 + '&letter=' + encodeURIComponent(letter)
-                + '&img=' + encodeURIComponent(selectedImageUrl)
+                + '&img=' + encodeURIComponent(imageUrl)
+                + '&recommend_img=' + encodeURIComponent(selectedImageUrl)
                 + '&amount=' + encodeURIComponent(amount);
         }
 
