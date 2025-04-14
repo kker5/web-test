@@ -165,12 +165,10 @@
             } catch (error) {
                 console.error('API 호출 중 오류 발생:', error);
             }
-            // window.location.href = '/kakao.html?category=' + encodeURIComponent(category)
-            //     + '&letter=' + encodeURIComponent(letter)
-            //     + '&img=' + encodeURIComponent(imageUrl)
-            //     + '&amount=' + encodeURIComponent(amount);
-            alert('송금 완료');
-            window.location.href = '/intro.html';
+            window.location.href = '/send_complete.html?category=' + encodeURIComponent(category)
+                + '&letter=' + encodeURIComponent(letter)
+                + '&img=' + encodeURIComponent(imageUrl)
+                + '&amount=' + encodeURIComponent(amount);
         });
 
     </script>

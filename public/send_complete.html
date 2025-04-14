@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest/manifest.json">
+    <title>송금 카드 만들기</title>
+    <script src="js/categoryBackground.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .container {
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .check-circle {
+            width: 120px;
+            height: 120px;
+            background-color: #FFE500;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .check-mark {
+            width: 50px;
+            height: 30px;
+            border-left: 8px solid #000;
+            border-bottom: 8px solid #000;
+            transform: rotate(-45deg);
+            margin-top: -10px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .button {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+        }
+
+        .button a {
+            display: block;
+            background-color: #FFE500;
+            color: #000;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-button" onclick="window.history.back()">←</div>
+    <div class="container">
+        <div class="check-circle">
+            <div class="check-mark"></div>
+        </div>
+        <div class="title">송금을 완료했어요</div>
+        <div class="subtitle" id="subtitleText">안성훈님에게 300,000원과<br>송금 카드를 보냈어요.</div>
+    </div>
+    <div class="button">
+        <a href="#" id="nextButton">확인</a>
+    </div>
+    <script>
+        // URL에서 letter 파라미터 추출
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('img');
+        const letter = urlParams.get('letter');
+        const category = urlParams.get('category');
+        const amount = urlParams.get('amount');
+
+        // 페이지 로드시 이미지 출력, letter 출력
+        // 페이지 로드시 card blue-bg가 card purple-bg로 변경
+        window.addEventListener('load', async () => {
+            // amount 텍스트 설정
+            const subtitleText = document.getElementById('subtitleText');
+            const formattedAmount = Number(amount).toLocaleString('ko-KR');
+            subtitleText.innerHTML = `안성훈님에게 ${formattedAmount}원과<br>송금 카드를 보냈어요.`;
+        }
+        )
+
+        // 다음 버튼 클릭 이벤트 추가
+        nextButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            window.location.href = '/intro.html';
+        });
+
+    </script>
+</body>
+
+</html>
