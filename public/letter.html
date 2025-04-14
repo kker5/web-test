@@ -240,13 +240,13 @@
         }
 
         // 이벤트 리스너 추가
-        textarea.addEventListener('input', function(e) {
+        textarea.addEventListener('input', function (e) {
             limitInput(e);
             // 입력된 텍스트가 있으면 버튼 표시, 없으면 숨김
             const editButton = document.getElementById('editButton');
             editButton.style.display = this.value.trim() ? 'flex' : 'none';
         });
-        
+
         textarea.addEventListener('keydown', function (e) {
             const lines = this.value.split('\n');
             if (e.key === 'Enter') {
@@ -302,12 +302,48 @@
                     const data = await response.json();
                     const result = data.result;
                     console.log(`${letterText} -> ${result}`);
-                    textarea.value = result;
+
+                    textarea.value = processText(result);
                 } catch (error) {
                     console.error('에러 발생:', error);
                 }
             }
         });
+
+        // 텍스트를 12자리 제한과 3줄 제한으로 처리하는 함수
+        function processText(text) {
+            const maxLength = 12;
+            const maxLines = 3;
+            let lines = [];
+            let currentLine = '';
+            let currentCount = 0;
+
+            // 텍스트를 문자 단위로 분리
+            const chars = text.split('');
+
+            for (let char of chars) {
+                const charSize = /[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/.test(char) ? 1 : 0.8;
+
+                if (currentCount + charSize <= maxLength) {
+                    currentLine += char;
+                    currentCount += charSize;
+                } else {
+                    if (lines.length < maxLines - 1) {
+                        lines.push(currentLine);
+                        currentLine = char;
+                        currentCount = charSize;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            if (currentLine && lines.length < maxLines) {
+                lines.push(currentLine);
+            }
+
+            return lines.join('\n');
+        }
     </script>
 </body>
 
