@@ -217,37 +217,40 @@
                 cardsContainer.innerHTML = '';
 
                 // 데이터의 각 항목에 대해 카드를 병렬로 생성
-                await Promise.all(data.map(async item => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-
-                    const checkbox = document.createElement('div');
-                    checkbox.className = 'checkbox';
-
-                    const img = document.createElement('img');
-                    img.src = item.image_url;
-                    img.alt = 'Card Image';
-                    console.log(item.image_url);
-
-                    card.appendChild(checkbox);
-                    card.appendChild(img);
-                    cardsContainer.appendChild(card);
-
-                    // 카드 클릭 이벤트 처리
-                    card.addEventListener('click', () => {
-                        // 모든 카드에서 selected 클래스 제거
-                        document.querySelectorAll('.card').forEach(c => {
-                            c.classList.remove('selected');
-                        });
-                        // 클릭된 카드에 selected 클래스 추가
-                        card.classList.add('selected');
-                    });
-                }));
+                addCard(imageUrl, cardsContainer);
+                await Promise.all(data.map(async item => addCard(item.image_url, cardsContainer)));
 
             } catch (error) {
                 console.error('API 호출 중 오류 발생:', error);
             }
         });
+
+        function addCard(image_url, cardsContainer) {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const checkbox = document.createElement('div');
+            checkbox.className = 'checkbox';
+
+            const img = document.createElement('img');
+            img.src = image_url;
+            img.alt = 'Card Image';
+
+            card.appendChild(checkbox);
+            card.appendChild(img);
+            cardsContainer.appendChild(card);
+
+            // 카드 클릭 이벤트 처리
+            card.addEventListener('click', () => {
+                // 모든 카드에서 selected 클래스 제거
+                document.querySelectorAll('.card').forEach(c => {
+                    c.classList.remove('selected');
+                });
+                // 클릭된 카드에 selected 클래스 추가
+                card.classList.add('selected');
+            });
+        }
+
 
     </script>
 </body>
