@@ -104,6 +104,14 @@
         const amountInput = document.getElementById('amountInput');
         const nextButton = document.getElementById('nextButton');
 
+        // Enter 키 입력 시 키보드 숨기기
+        amountInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                amountInput.blur();
+            }
+        });
+
         function formatCurrency(amount) {
             if (!amount) return '';
             // 모든 쉼표 제거 후 숫자만 추출
