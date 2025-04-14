@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,6 +150,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="back-button" onclick="window.history.back()">←</div>
     <div class="status-bar"></div>
@@ -161,10 +163,7 @@
         </div>
         <div class="title">보내고 싶은</div>
         <div class="title">편지를 써보세요</div>
-        <input type="text" 
-               class="letter-input" 
-               id="letterInput" 
-               placeholder="편지를 써보세요">
+        <input type="text" class="letter-input" id="letterInput" placeholder="편지를 써보세요">
     </div>
     <div class="button">
         <a href="#" id="nextButton">만들기</a>
@@ -189,7 +188,7 @@
         function limitInput(e) {
             const text = e.target.value;
             const lines = text.split('\n');
-            
+
             // 줄 제한
             if (lines.length > 2) {
                 e.target.value = lines.slice(0, 2).join('\n');
@@ -202,7 +201,7 @@
             let count = 0;
             const kor_char_size = 1;
             const etc_char_size = 0.8;
-            const max_char_size = 11;
+            const max_char_size = 10;
             for (let char of lines[0]) {
                 if (/[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/.test(char)) {
                     // 한글인 경우
@@ -249,7 +248,7 @@
 
         // 이벤트 리스너 추가
         textarea.addEventListener('input', limitInput);
-        textarea.addEventListener('keydown', function(e) {
+        textarea.addEventListener('keydown', function (e) {
             const lines = this.value.split('\n');
             if (e.key === 'Enter') {
                 if (lines.length >= 2) {
@@ -269,7 +268,7 @@
             }
         });
         // 다음 버튼 클릭 이벤트 추가
-        nextButton.addEventListener('click', function(e) {
+        nextButton.addEventListener('click', function (e) {
             e.preventDefault();
             const letterText = textarea.value;
             if (letterText.trim() === '') {
@@ -280,4 +279,5 @@
         });
     </script>
 </body>
+
 </html>
