@@ -223,7 +223,7 @@
                 if (!selectedImageUrl || selectedImageUrl == imageUrl) {
                     fixedCards = [addCard(imageUrl, cardsContainer, true)]
                 } else {
-                    fixedCards = [addCard(selectedImageUrl, cardsContainer, true)].concat([addCard(imageUrl, cardsContainer)])
+                    fixedCards = [addCard(selectedImageUrl, cardsContainer, true), addCard(imageUrl, cardsContainer)]
                 }
                 console.log(fixedCards.length)
                 await Promise.all(
