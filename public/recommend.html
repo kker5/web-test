@@ -220,7 +220,7 @@
 
                 // 데이터의 각 항목에 대해 카드를 병렬로 생성
                 let fixedCards = [];
-                if (recommendImageUrl == imageUrl) {
+                if (!recommendImageUrl || recommendImageUrl == imageUrl) {
                     fixedCards = [addCard(imageUrl, cardsContainer, true)]
                 } else {
                     fixedCards = [addCard(recommendImageUrl, cardsContainer, true)].concat([addCard(imageUrl, cardsContainer)])
