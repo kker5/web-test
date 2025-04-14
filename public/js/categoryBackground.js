@@ -16,7 +16,7 @@ const categoryBackgrounds = {
  * @returns {string} 배경 이미지 URL
  */
 function getCategoryBackground(category) {
-    const background = categoryBackgrounds[category] || categoryBackgrounds.default;
+    const background = categoryBackgrounds[category] || categoryBackgrounds.etc;
     return background;
 }
 
