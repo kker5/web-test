@@ -47,7 +47,7 @@
 
         .letter-input {
             text-align: center;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             font-family: 'SpoqaHanSans';
             margin: 40px 0;
@@ -62,8 +62,8 @@
             box-sizing: border-box;
             resize: none;
             height: auto;
-            min-height: 60px;
-            max-height: 100px;
+            min-height: 80px;
+            max-height: 150px;
             overflow-y: auto;
             white-space: pre-wrap;
             word-break: break-all;
@@ -81,14 +81,14 @@
         }
 
         .edit-button {
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             gap: 4px;
             width: fit-content;
             padding: 8px 16px;
             background-color: #F2F2F2;
-            border: 1px solid #e8e8e8;
+            border: 1px solid #F2F2F2;
             border-radius: 100px;
             color: #000;
             font-size: 14px;
@@ -157,18 +157,19 @@
             const lines = text.split('\n');
 
             // 줄 제한
-            if (lines.length > 2) {
-                e.target.value = lines.slice(0, 2).join('\n');
+            if (lines.length > 3) {
+                e.target.value = lines.slice(0, 3).join('\n');
                 return;
             }
 
             // 각 줄별 글자 수 제한
             let firstLine = '';
             let secondLine = '';
+            let thirdLine = '';
             let count = 0;
             const kor_char_size = 1;
             const etc_char_size = 0.8;
-            const max_char_size = 10;
+            const max_char_size = 12;
             for (let char of lines[0]) {
                 if (/[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/.test(char)) {
                     // 한글인 경우
@@ -199,42 +200,74 @@
                         if (secondCount + kor_char_size <= max_char_size) {
                             secondLine += char;
                             secondCount += kor_char_size;
+                        } else if (lines.length === 2) {
+                            thirdLine += char;
                         }
                     } else {
                         if (secondCount + etc_char_size <= max_char_size) {
                             secondLine += char;
                             secondCount += etc_char_size;
+                        } else if (lines.length === 2) {
+                            thirdLine += char;
+                        }
+                    }
+                }
+            }
+
+            // 세 번째 줄이 있는 경우 처리
+            if (lines.length > 2) {
+                let thirdCount = 0;
+                for (let char of lines[2]) {
+                    if (/[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/.test(char)) {
+                        if (thirdCount + kor_char_size <= max_char_size) {
+                            thirdLine += char;
+                            thirdCount += kor_char_size;
+                        }
+                    } else {
+                        if (thirdCount + etc_char_size <= max_char_size) {
+                            thirdLine += char;
+                            thirdCount += etc_char_size;
                         }
                     }
                 }
             }
 
             // 결과 적용
-            e.target.value = secondLine ? `${firstLine}\n${secondLine}` : firstLine;
+            let result = firstLine;
+            if (secondLine) result += '\n' + secondLine;
+            if (thirdLine) result += '\n' + thirdLine;
+            e.target.value = result;
         }
 
         // 이벤트 리스너 추가
-        textarea.addEventListener('input', limitInput);
+        textarea.addEventListener('input', function(e) {
+            limitInput(e);
+            // 입력된 텍스트가 있으면 버튼 표시, 없으면 숨김
+            const editButton = document.getElementById('editButton');
+            editButton.style.display = this.value.trim() ? 'flex' : 'none';
+        });
+        
         textarea.addEventListener('keydown', function (e) {
             const lines = this.value.split('\n');
             if (e.key === 'Enter') {
-                if (lines.length >= 2) {
-                    // 이미 2줄인 경우 Enter 키 방지
+                if (lines.length >= 3) {
+                    // 이미 3줄인 경우 Enter 키 방지
                     e.preventDefault();
                 } else {
-                    // 첫 번째 줄에서 Enter 키 입력 시 두 번째 줄로 이동
+                    // Enter 키 입력 시 다음 줄로 이동
                     e.preventDefault();
-                    const firstLine = lines[0];
-                    const remainingChars = firstLine.slice(11); // 첫 번째 줄의 남은 문자들
+                    const currentLine = lines[lines.length - 1];
+                    const remainingChars = currentLine.slice(12); // 현재 줄의 남은 문자들
                     if (remainingChars) {
-                        this.value = firstLine.slice(0, 11) + '\n' + remainingChars;
+                        this.value = lines.slice(0, -1).join('\n') + '\n' + remainingChars;
                     } else {
-                        this.value = firstLine + '\n';
+                        this.value = this.value + '\n';
                     }
                 }
             }
             originalText = this.value.replace(/\n/g, '');
         });
+
         // 다음 버튼 클릭 이벤트 추가
         nextButton.addEventListener('click', function (e) {
             e.preventDefault();
