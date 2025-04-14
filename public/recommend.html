@@ -218,15 +218,18 @@
                 cardsContainer.innerHTML = '';
 
                 // 데이터의 각 항목에 대해 카드를 병렬로 생성
-                
-                await Promise.all(addCard(imageUrl, cardsContainer) + data.slice(0, 9).map(async item => addCard(item.image_url, cardsContainer)));
+
+                await Promise.all(
+                    addCard(imageUrl, cardsContainer, true) +
+                    data.filter(item => item.image_url != imageUrl).slice(0, 9).map(async item => addCard(item.image_url, cardsContainer))
+                );
 
             } catch (error) {
                 console.error('API 호출 중 오류 발생:', error);
             }
         });
 
-        async function addCard(image_url, cardsContainer) {
+        async function addCard(image_url, cardsContainer, selected = false) {
             const card = document.createElement('div');
             card.className = 'card';
 
@@ -250,6 +253,9 @@
                 // 클릭된 카드에 selected 클래스 추가
                 card.classList.add('selected');
             });
+            if (selected) {
+                card.classList.add('selected');
+            }
         }
 
 
