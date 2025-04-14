@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest/manifest.json">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js"></script>
     <title>송금 카드 만들기</title>
+    <script src="js/categoryBackground.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -70,14 +70,19 @@
             overflow: hidden;
             margin: 0 -8px;
             padding: 0 8px;
-            height: 33vh;
+            height: 36vh;
             position: relative;
+            justify-content: center;
+            align-items: center;
         }
 
         .card-wrapper {
             display: flex;
             animation: slideLeft 15s linear infinite;
             gap: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .card {
@@ -85,13 +90,13 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            width: 53vw;
-            height: 33vh;
+            width: 58vw;
+            height: 36vh;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 15px;
             box-sizing: border-box;
             background-size: cover;
@@ -111,16 +116,15 @@
         }
 
         .card img {
-            width: 88%;
-            height: 88%;
+            width: 100%;
             object-fit: cover;
             border-radius: 15px;
         }
 
         .card-text {
             color: #ffffff;
-            padding: 12px;
-            font-size: 15px;
+            padding: 15px;
+            font-size: 20px;
             line-height: 1.4;
             text-align: center;
             width: 100%;
@@ -147,17 +151,6 @@
             text-align: center;
             font-size: 16px;
         }
-
-        @keyframes slideLeft {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-219vw);
-                /* (53vw + 20px gap) * 3 cards */
-            }
-        }
     </style>
 </head>
 
@@ -165,86 +158,47 @@
     <div class="back-button" onclick="window.history.back()">←</div>
     <div class="status-bar"></div>
     <div class="container">
-        <div class="title">나만의 송금 카드</div>
-        <div class="title">만드는 중..</div>
-        <div class="subtitle">최대 3분정도 걸릴 수 있어요.<br>완료되면 바로 알림을 보내드릴게요.</div>
-        <div id="my-animation"></div>
+        <div class="title">엄마에게</div>
+        <div class="title" id="amountText">0원을</div>
+        <div class="title">받았어요!</div>
+        <div class="subtitle"></div>
+        <div class="cards-grid">
+            <div class="card-wrapper">
+                <div class="card">
+                    <img alt="Card Image">
+                    <div class="card-text"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="button">
-        <a href="#" onclick="shareContent(event)">친구에게도 알려주기</a>
+    <div class="button" onclick="window.location.href='intro.html'">
+        <a href="#">확인(처음으로)</a>
     </div>
     <script>
-        lottie.loadAnimation({
-            container: document.getElementById('my-animation'),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            path: 'lottie/siren_5.json' // Lottie JSON 파일 경로
-        });
         // URL에서 letter 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('img');
         const letter = urlParams.get('letter');
+        const category = urlParams.get('category');
         const amount = urlParams.get('amount');
 
-        /*
-        curl -X POST https://erlklxz6gybzmki6rm2ww5pdve0olugs.lambda-url.us-west-2.on.aws/ \
-        -H "Content-Type: application/json" \
-        -d '{"message": "결혼 축하해~"}'
-        */
-        // 페이지 로드 시 API 호출
+        // 페이지 로드시 이미지 출력, letter 출력
+        // 페이지 로드시 card blue-bg가 card purple-bg로 변경
         window.addEventListener('load', async () => {
-            if (letter) {
-                try {
-                    const response = await fetch('https://erlklxz6gybzmki6rm2ww5pdve0olugs.lambda-url.us-west-2.on.aws', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        mode: 'cors',
-                        body: JSON.stringify({
-                            message: letter
-                        })
-                    });
+            const cardImage = document.querySelector('.card img');
+            cardImage.src = imageUrl;
+            const cardText = document.querySelector('.card-text');
+            cardText.innerHTML = letter.replace(/\n/g, '<br>');
+            const card = document.querySelector('.card');
+            // 카테고리별로 배경 이미지 설정
+            setElementBackground(card, category);
 
-                    if (!response.ok) {
-                        throw new Error('API 호출 실패');
-                    }
-                    // 응답 json의 imageUrl 추출
-                    const data = await response.json();
-                    const imageUrl = data.imageUrl;
-                    const category = data.category;
-
-                    // API 호출이 성공하면 complete.html로 이동
-                    window.location.href = '/complete.html?category=' + encodeURIComponent(category)
-                        + '&letter=' + encodeURIComponent(letter)
-                        + '&img=' + encodeURIComponent(imageUrl)
-                        + '&amount=' + encodeURIComponent(amount);
-                } catch (error) {
-                    console.error('API 호출 중 오류 발생:', error);
-                }
-            }
-        });
-
-        async function shareContent(event) {
-            event.preventDefault();
-
-            if (navigator.share) {
-                const shareData = {
-                    title: '송금 카드 만들기',
-                    text: '나만의 송금 카드를 만들어보세요!',
-                    url: window.location.href // 전체 URL 사용
-                };
-
-                try {
-                    await navigator.share(shareData);
-                } catch (error) {
-                    // 사용자가 공유를 취소했을 때도 여기로 들어옴
-                    console.log('공유하기 실패 또는 취소:', error);
-                }
-            } else {
-                alert('공유하기가 지원되지 않는 브라우저입니다.');
-            }
+            // amount 텍스트 설정
+            const amountText = document.getElementById('amountText');
+            const formattedAmount = Number(amount).toLocaleString('ko-KR');
+            amountText.textContent = formattedAmount + '원을';
         }
+        )
 
     </script>
 </body>
