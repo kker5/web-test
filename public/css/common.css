@@ -49,3 +49,24 @@ body {
     font-size: 24px;
     font-weight: bold;
 }
+
+.button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: #EFF6FE;
+}
+
+.button a {
+    display: block;
+    background-color: #FFD600;
+    color: #000000;
+    text-decoration: none;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+}
