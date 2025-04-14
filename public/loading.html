@@ -102,10 +102,10 @@
                     const category = data.category;
 
                     // API 호출이 성공하면 complete.html로 이동
-                    // window.location.href = '/complete.html?category=' + encodeURIComponent(category)
-                    //     + '&letter=' + encodeURIComponent(letter)
-                    //     + '&img=' + encodeURIComponent(imageUrl)
-                    //     + '&amount=' + encodeURIComponent(amount);
+                    window.location.href = '/complete.html?category=' + encodeURIComponent(category)
+                        + '&letter=' + encodeURIComponent(letter)
+                        + '&img=' + encodeURIComponent(imageUrl)
+                        + '&amount=' + encodeURIComponent(amount);
                 } catch (error) {
                     console.error('API 호출 중 오류 발생:', error);
                 }
