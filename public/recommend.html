@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest/manifest.json">
     <link rel="stylesheet" href="css/common.css">
+    <script src="js/encodeURI.js"></script>
     <title>송금 카드 만들기</title>
     <style>
         .container {
@@ -99,8 +100,8 @@
     <script>
         // URL에서 letter 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
-        const imageUrl = urlParams.get('img');
-        const selectedImageUrl = urlParams.get('selected_img');
+        const imageUrl = decodeURIIfNotEmpty(urlParams.get('img'));
+        const selectedImageUrl = decodeURIIfNotEmpty(urlParams.get('selected_img'));
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
         const amount = urlParams.get('amount');

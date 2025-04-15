@@ -8,6 +8,7 @@
     <title>송금 카드 만들기</title>
     <script src="js/categoryBackground.js"></script>
     <link rel="stylesheet" href="css/common.css">
+    <script src="js/encodeURI.js"></script>
     <style>
         .container {
             padding: 0 20px;
@@ -134,8 +135,8 @@
     <script>
         // URL에서 letter 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
-        const imageUrl = urlParams.get('img');
-        const selectedImageUrl = urlParams.get('selected_img');
+        const imageUrl = decodeURIIfNotEmpty(urlParams.get('img'));
+        const selectedImageUrl = decodeURIIfNotEmpty(urlParams.get('selected_img'));
         const letter = urlParams.get('letter');
         const category = urlParams.get('category');
         const amount = urlParams.get('amount');
